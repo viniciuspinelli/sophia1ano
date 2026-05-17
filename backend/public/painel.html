@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel — Festa da Sophia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blush:      #fdf5f7;
+      --rose:       #c97a8d;
+      --rose-deep:  #a85570;
+      --rose-light: #f2d6df;
+      --rose-pale:  #faedf1;
+      --gold:       #c9a84c;
+      --gold-light: #f5edd6;
+      --text:       #4a2c38;
+      --text-muted: #9a7585;
+      --white:      #ffffff;
+      --shadow-sm:  0 2px 12px rgba(74,44,56,0.08);
+      --shadow-md:  0 8px 40px rgba(74,44,56,0.12);
+      --shadow-lg:  0 20px 60px rgba(74,44,56,0.18);
+      --radius:     20px;
+      --radius-sm:  10px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      background: var(--blush);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .page-header {
+      background: linear-gradient(135deg, var(--rose-deep) 0%, #8a3a52 100%);
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(168,85,112,0.3);
+    }
+    .page-header .title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      color: var(--white);
+      text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      line-height: 1;
+    }
+    .page-header .subtitle {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-top: 6px;
+    }
+
+    /* MAIN WRAPPER */
+    main { max-width: 820px; margin: 0 auto; padding: 48px 20px 80px; }
+
+    /* CARD */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(201,122,141,0.1);
+    }
+
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+
+    /* FORM FIELDS */
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--blush);
+      border: 1.5px solid var(--rose-light);
+      border-radius: var(--radius-sm);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.93rem;
+      font-weight: 500;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+    .field input:focus {
+      border-color: var(--rose);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(201,122,141,0.1);
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+      color: var(--white);
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(168,85,112,0.3);
+      margin-top: 8px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(168,85,112,0.4); }
+
+    .feedback {
+      margin-top: 14px;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.87rem;
+      font-weight: 500;
+      display: none;
+    }
+    .feedback.error { background: #fdf2f4; color: #8a2c3a; border-left: 3px solid var(--rose); display: block; }
+
+    /* STATS */
+    .stats-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .stat-box {
+      background: var(--rose-pale);
+      border-radius: var(--radius-sm);
+      padding: 18px 24px;
+      text-align: center;
+      flex: 1;
+      min-width: 100px;
+      border: 1px solid rgba(201,122,141,0.12);
+    }
+    .stat-box .n {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--rose-deep);
+      font-weight: 600;
+      display: block;
+      line-height: 1;
+    }
+    .stat-box .l {
+      font-size: 0.63rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 5px;
+      display: block;
+    }
+
+    /* DASH HEADER */
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    /* TABLE */
+    .table-wrapper { overflow-x: auto; border-radius: var(--radius-sm); }
+    .guest-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    .guest-table th {
+      background: var(--rose-pale);
+      color: var(--rose-deep);
+      padding: 11px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+    .guest-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+    .guest-table th:last-child  { border-radius: 0 var(--radius-sm) 0 0; }
+    .guest-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--rose-pale);
+      vertical-align: middle;
+    }
+    .guest-table tr:last-child td { border-bottom: none; }
+    .guest-table tr:hover td { background: #fdf6f8; }
+
+    .tag {
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .tag-rose { background: var(--rose); color: var(--white); }
+    .tag-gold { background: var(--gold-light); color: #7a6020; border: 1px solid rgba(201,168,76,0.3); }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-muted);
+      font-style: italic;
+      font-size: 0.9rem;
+      border: 1.5px dashed var(--rose-light);
+      border-radius: var(--radius-sm);
+    }
+
+    /* BUTTONS */
+    .btn-danger {
+      padding: 9px 18px;
+      background: #ef5350;
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-danger:hover { background: #c62828; }
+    .btn-danger.sm { padding: 4px 10px; font-size: 0.65rem; }
+
+    .btn-ghost {
+      padding: 9px 18px;
+      background: none;
+      border: 1.5px solid var(--rose-light);
+      color: var(--rose-deep);
+      border-radius: var(--radius-sm);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-ghost:hover { background: var(--rose-pale); }
+
+    .actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    /* REFRESH BADGE */
+    .refresh-note {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 14px;
+      text-align: right;
+    }
+
+    @media (max-width: 560px) {
+      .card { padding: 28px 18px; }
+      .guest-table th, .guest-table td { padding: 9px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="page-header">
+    <div class="title">Sophia</div>
+    <div class="subtitle">Painel de Presenças · 1 Aninho</div>
+  </header>
+
+  <main>
+
+    <!-- LOGIN -->
+    <div class="card" id="login-card">
+      <h2 class="card-title">Entrar no Painel</h2>
+      <div class="field">
+        <label for="adm-u">Usuário</label>
+        <input type="text" id="adm-u" autocomplete="username" placeholder="admin" />
+      </div>
+      <div class="field">
+        <label for="adm-p">Senha</label>
+        <input type="password" id="adm-p" autocomplete="current-password" placeholder="••••••••" />
+      </div>
+      <div class="feedback" id="fb-login"></div>
+      <button class="btn-login" id="btn-login">Entrar</button>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" style="display:none">
+      <div class="stats-row" id="stats-row"></div>
+
+      <div class="card">
+        <div class="dash-header">
+          <h2 class="card-title" style="margin-bottom:0">Confirmações</h2>
+          <button class="btn-ghost" id="btn-refresh">↻ Atualizar</button>
+        </div>
+
+        <div class="table-wrapper">
+          <div id="table-area"><div class="empty-state">Carregando...</div></div>
+        </div>
+
+        <p class="refresh-note" id="last-update"></p>
+
+        <div class="actions-row">
+          <button class="btn-danger" id="btn-clear">Limpar todas as confirmações</button>
+          <button class="btn-ghost" id="btn-logout">Sair</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let tok = sessionStorage.getItem('sophia_adm_tok') || null;
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.appendChild(document.createTextNode(s));
+      return d.innerHTML;
+    }
+    function fmt(iso) {
+      return new Date(iso).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+
+    document.getElementById('btn-login').addEventListener('click', async () => {
+      const fb = document.getElementById('fb-login');
+      fb.className = 'feedback';
+      const u = document.getElementById('adm-u').value.trim();
+      const p = document.getElementById('adm-p').value;
+      if (!u || !p) {
+        fb.textContent = 'Preencha usuário e senha.';
+        fb.className = 'feedback error';
+        return;
+      }
+      try {
+        const r = await fetch('/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usuario: u, senha: p })
+        });
+        const d = await r.json();
+        if (!r.ok || !d.sucesso) {
+          fb.textContent = d.erro || 'Credenciais inválidas.';
+          fb.className = 'feedback error';
+          return;
+        }
+        tok = d.token;
+        sessionStorage.setItem('sophia_adm_tok', tok);
+        showDash();
+      } catch {
+        fb.textContent = 'Erro de conexão. Tente novamente.';
+        fb.className = 'feedback error';
+      }
+    });
+
+    document.getElementById('adm-p').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('btn-login').click();
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+      try { await fetch('/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + tok } }); } catch {}
+      tok = null;
+      sessionStorage.removeItem('sophia_adm_tok');
+      document.getElementById('dashboard').style.display = 'none';
+      document.getElementById('login-card').style.display = 'block';
+    });
+
+    document.getElementById('btn-clear').addEventListener('click', async () => {
+      if (!confirm('Limpar TODAS as confirmações? Esta ação não pode ser desfeita.')) return;
+      try {
+        const r = await fetch('/confirmados', { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + tok } });
+        if (r.ok) loadData();
+      } catch {}
+    });
+
+    document.getElementById('btn-refresh').addEventListener('click', () => loadData());
+
+    async function del(id) {
+      if (!confirm('Remover esta confirmação?')) return;
+      try {
+        const r = await fetch('/confirmados/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + tok } });
+        if (r.ok) loadData();
+        else alert('Erro ao remover.');
+      } catch { alert('Erro de conexão.'); }
+    }
+
+    async function loadData() {
+      try {
+        const r = await fetch('/admin/confirmados', { headers: { 'Authorization': 'Bearer ' + tok } });
+        if (r.status === 401) {
+          tok = null; sessionStorage.removeItem('sophia_adm_tok');
+          document.getElementById('dashboard').style.display = 'none';
+          document.getElementById('login-card').style.display = 'block';
+          return;
+        }
+        const d = await r.json();
+        const total = d.total.adultos + d.total.criancas;
+
+        document.getElementById('stats-row').innerHTML = `
+          <div class="stat-box"><span class="n">${d.confirmados.length}</span><span class="l">Famílias</span></div>
+          <div class="stat-box"><span class="n">${d.total.adultos}</span><span class="l">Adultos</span></div>
+          <div class="stat-box"><span class="n">${d.total.criancas}</span><span class="l">Crianças</span></div>
+          <div class="stat-box"><span class="n">${total}</span><span class="l">Total de pessoas</span></div>
+        `;
+
+        const area = document.getElementById('table-area');
+        if (!d.confirmados.length) {
+          area.innerHTML = '<div class="empty-state">Nenhuma confirmação registrada ainda.</div>';
+        } else {
+          area.innerHTML = `
+            <table class="guest-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome</th>
+                  <th>Adultos</th>
+                  <th>Crianças</th>
+                  <th>Observação</th>
+                  <th>Data</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                ${d.confirmados.map((c, i) => `
+                  <tr>
+                    <td style="color:var(--text-muted);font-size:0.8rem">${i + 1}</td>
+                    <td style="font-weight:600">${esc(c.nome)}</td>
+                    <td><span class="tag tag-rose">${c.adultos}</span></td>
+                    <td>${c.criancas > 0 ? `<span class="tag tag-gold">${c.criancas}</span>` : '<span style="color:var(--text-muted)">—</span>'}</td>
+                    <td style="color:var(--text-muted);font-style:italic;font-size:0.82rem">${c.observacao ? esc(c.observacao) : '—'}</td>
+                    <td style="color:var(--text-muted);font-size:0.78rem;white-space:nowrap">${fmt(c.data_confirmacao)}</td>
+                    <td><button class="btn-danger sm" onclick="del(${c.id})">Remover</button></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          `;
+        }
+
+        const now = new Date().toLocaleString('pt-BR', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+        document.getElementById('last-update').textContent = `Última atualização: ${now}`;
+      } catch {
+        document.getElementById('table-area').innerHTML = '<div class="empty-state">Erro ao carregar dados.</div>';
+      }
+    }
+
+    async function showDash() {
+      document.getElementById('login-card').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      await loadData();
+      setInterval(loadData, 30000);
+    }
+
+    // Auto-login se token salvo ainda é válido
+    if (tok) {
+      fetch('/verificar-token', { headers: { 'Authorization': 'Bearer ' + tok } })
+        .then(r => r.json())
+        .then(d => { if (d.valido) showDash(); else { tok = null; sessionStorage.removeItem('sophia_adm_tok'); } })
+        .catch(() => {});
+    }
+  </script>
+
+</body>
+</html>

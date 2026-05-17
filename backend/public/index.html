@@ -451,74 +451,6 @@
     footer { text-align: center; padding: 40px 24px; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.3px; }
     footer strong { color: var(--rose-deep); font-weight: 600; }
 
-    /* ADMIN FAB */
-    .adm-fab {
-      position: fixed;
-      bottom: 24px; right: 24px;
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--white);
-      border: 1.5px solid var(--rose-light);
-      color: var(--text-muted);
-      cursor: pointer;
-      box-shadow: var(--shadow-sm);
-      z-index: 400;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, box-shadow 0.2s;
-    }
-    .adm-fab:hover { background: var(--rose-pale); box-shadow: var(--shadow-md); }
-    .adm-fab svg { width: 15px; height: 15px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; }
-
-    /* ADMIN OVERLAY */
-    #adm-overlay {
-      display: none;
-      position: fixed; inset: 0;
-      background: rgba(74,44,56,0.6);
-      backdrop-filter: blur(5px);
-      z-index: 999;
-      overflow-y: auto;
-      padding: 40px 16px;
-    }
-    .adm-sheet {
-      background: var(--white);
-      border-radius: var(--radius);
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 44px;
-      position: relative;
-      box-shadow: var(--shadow-lg);
-    }
-    .adm-sheet h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--text); margin-bottom: 28px; }
-    .close-btn {
-      position: absolute; top: 18px; right: 18px;
-      width: 32px; height: 32px; border-radius: 50%;
-      border: 1.5px solid var(--rose-light);
-      background: none; color: var(--text-muted);
-      font-size: 0.9rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, color 0.2s;
-    }
-    .close-btn:hover { background: var(--rose); color: var(--white); border-color: var(--rose); }
-
-    .adm-stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
-    .adm-stat { background: var(--rose-pale); border-radius: var(--radius-sm); padding: 14px 20px; text-align: center; flex: 1; min-width: 90px; }
-    .adm-stat .n { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--rose-deep); font-weight: 600; display: block; }
-    .adm-stat .l { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-
-    .adm-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
-    .adm-table th { background: var(--rose-pale); color: var(--rose-deep); padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.67rem; letter-spacing: 1px; text-transform: uppercase; }
-    .adm-table td { padding: 10px 12px; border-bottom: 1px solid var(--rose-pale); vertical-align: middle; }
-    .adm-table tr:last-child td { border-bottom: none; }
-    .adm-table tr:hover td { background: #fdf6f8; }
-
-    .adm-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
-    .btn-danger { padding: 8px 16px; background: #ef5350; color: #fff; border: none; border-radius: var(--radius-sm); font-family: 'Raleway', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
-    .btn-danger:hover { background: #c62828; }
-    .btn-danger.sm { padding: 4px 10px; font-size: 0.66rem; }
-    .btn-ghost { padding: 8px 16px; background: none; border: 1.5px solid var(--rose-light); color: var(--rose-deep); border-radius: var(--radius-sm); font-family: 'Raleway', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
-    .btn-ghost:hover { background: var(--rose-pale); }
-    .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%); color: var(--white); border: none; border-radius: var(--radius-sm); font-family: 'Raleway', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; box-shadow: 0 6px 20px rgba(168,85,112,0.3); margin-top: 8px; }
-
     @media (max-width: 560px) {
       .field-row { grid-template-columns: 1fr; }
       .card { padding: 28px 20px; }
@@ -696,59 +628,11 @@
     Feito com carinho para o primeiro aninho de <strong>Sophia</strong>
   </footer>
 
-  <!-- Admin FAB -->
-  <button class="adm-fab" id="fab" aria-label="Administração">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-5 0-8 2.5-8 4v1h16v-1c0-1.5-3-4-8-4z"/></svg>
-  </button>
-
-  <!-- Admin overlay -->
-  <div id="adm-overlay">
-    <div class="adm-sheet">
-      <button class="close-btn" id="close-adm">&#x2715;</button>
-
-      <div id="adm-login">
-        <h2>Área Administrativa</h2>
-        <div class="field" style="margin-bottom:16px">
-          <label for="adm-u">Usuário</label>
-          <input type="text" id="adm-u" autocomplete="username" />
-        </div>
-        <div class="field" style="margin-bottom:16px">
-          <label for="adm-p">Senha</label>
-          <input type="password" id="adm-p" autocomplete="current-password" />
-        </div>
-        <div class="feedback" id="fb-login"></div>
-        <button class="btn-login" id="btn-login">Entrar</button>
-      </div>
-
-      <div id="adm-dash" style="display:none">
-        <h2>Gerenciar Confirmações</h2>
-        <div class="adm-stats" id="adm-stats"></div>
-        <table class="adm-table">
-          <thead>
-            <tr>
-              <th>#</th><th>Nome</th><th>Adultos</th><th>Crianças</th><th>Observação</th><th>Data</th><th></th>
-            </tr>
-          </thead>
-          <tbody id="adm-tbody"></tbody>
-        </table>
-        <div class="adm-actions">
-          <button class="btn-danger" id="btn-clear">Limpar tudo</button>
-          <button class="btn-ghost" id="btn-logout">Sair</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <script>
-    let tok = localStorage.getItem('sophia_tok') || null;
-
     function esc(s) {
       const d = document.createElement('div');
       d.appendChild(document.createTextNode(s));
       return d.innerHTML;
-    }
-    function fmt(iso) {
-      return new Date(iso).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
     }
     function fb(id, msg, type) {
       const el = document.getElementById(id);
@@ -808,91 +692,6 @@
       } catch { fb('fb', 'Erro de conexão. Tente novamente.', 'error'); }
       finally { btn.disabled = false; btn.textContent = 'Confirmar Presença'; }
     });
-
-    document.getElementById('fab').addEventListener('click', () => {
-      document.getElementById('adm-overlay').style.display = 'block';
-      if (tok) checkTok();
-    });
-    document.getElementById('close-adm').addEventListener('click', () => { document.getElementById('adm-overlay').style.display = 'none'; });
-    document.getElementById('adm-overlay').addEventListener('click', e => { if (e.target.id === 'adm-overlay') document.getElementById('adm-overlay').style.display = 'none'; });
-
-    document.getElementById('btn-login').addEventListener('click', async () => {
-      document.getElementById('fb-login').className = 'feedback';
-      const u = document.getElementById('adm-u').value.trim();
-      const p = document.getElementById('adm-p').value;
-      if (!u || !p) { fb('fb-login', 'Preencha usuário e senha.', 'error'); return; }
-      try {
-        const r = await fetch('/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ usuario: u, senha: p }) });
-        const d = await r.json();
-        if (!r.ok || !d.sucesso) { fb('fb-login', d.erro || 'Credenciais inválidas.', 'error'); return; }
-        tok = d.token; localStorage.setItem('sophia_tok', tok);
-        showDash();
-      } catch { fb('fb-login', 'Erro de conexão.', 'error'); }
-    });
-
-    document.getElementById('btn-logout').addEventListener('click', async () => {
-      try { await fetch('/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + tok } }); } catch {}
-      tok = null; localStorage.removeItem('sophia_tok');
-      document.getElementById('adm-login').style.display = 'block';
-      document.getElementById('adm-dash').style.display = 'none';
-    });
-
-    document.getElementById('btn-clear').addEventListener('click', async () => {
-      if (!confirm('Limpar TODAS as confirmações? Esta ação não pode ser desfeita.')) return;
-      try {
-        const r = await fetch('/confirmados', { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + tok } });
-        if (r.ok) { loadGuests(); showDash(); }
-      } catch {}
-    });
-
-    async function checkTok() {
-      try {
-        const r = await fetch('/verificar-token', { headers: { 'Authorization': 'Bearer ' + tok } });
-        const d = await r.json();
-        if (d.valido) showDash();
-        else { tok = null; localStorage.removeItem('sophia_tok'); }
-      } catch {}
-    }
-
-    async function showDash() {
-      document.getElementById('adm-login').style.display = 'none';
-      document.getElementById('adm-dash').style.display = 'block';
-      try {
-        const r = await fetch('/admin/confirmados', { headers: { 'Authorization': 'Bearer ' + tok } });
-        const d = await r.json();
-        document.getElementById('adm-stats').innerHTML = `
-          <div class="adm-stat"><span class="n">${d.confirmados.length}</span><span class="l">Famílias</span></div>
-          <div class="adm-stat"><span class="n">${d.total.adultos}</span><span class="l">Adultos</span></div>
-          <div class="adm-stat"><span class="n">${d.total.criancas}</span><span class="l">Crianças</span></div>
-          <div class="adm-stat"><span class="n">${d.total.adultos + d.total.criancas}</span><span class="l">Total</span></div>
-        `;
-        const tb = document.getElementById('adm-tbody');
-        if (!d.confirmados.length) {
-          tb.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:24px;font-style:italic">Nenhuma confirmação</td></tr>';
-          return;
-        }
-        tb.innerHTML = d.confirmados.map((c, i) => `
-          <tr>
-            <td style="color:var(--text-muted)">${i+1}</td>
-            <td style="font-weight:600">${esc(c.nome)}</td>
-            <td>${c.adultos}</td>
-            <td>${c.criancas}</td>
-            <td style="color:var(--text-muted);font-style:italic">${c.observacao ? esc(c.observacao) : '—'}</td>
-            <td style="color:var(--text-muted);font-size:0.78rem">${fmt(c.data_confirmacao)}</td>
-            <td><button class="btn-danger sm" onclick="del(${c.id})">Remover</button></td>
-          </tr>
-        `).join('');
-      } catch {}
-    }
-
-    async function del(id) {
-      if (!confirm('Remover esta confirmação?')) return;
-      try {
-        const r = await fetch('/confirmados/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + tok } });
-        if (r.ok) { loadGuests(); showDash(); }
-        else alert('Erro ao remover.');
-      } catch { alert('Erro de conexão.'); }
-    }
 
     loadGuests();
     setInterval(loadGuests, 30000);
