@@ -109,6 +109,27 @@
       display: block;
       box-shadow: var(--shadow-lg);
     }
+    .invite-wrapper::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 55%;
+      border-radius: 0 0 20px 20px;
+      background: linear-gradient(to top, rgba(74,20,38,0.72) 0%, transparent 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    .invite-overlay-ctas {
+      position: absolute;
+      bottom: 20px;
+      left: 0; right: 0;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 0 20px;
+    }
 
     .eyebrow {
       font-size: 0.68rem;
@@ -200,18 +221,20 @@
     .cta-btn {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
+      gap: 8px;
+      padding: 11px 22px;
       border-radius: 50px;
       font-family: 'Raleway', sans-serif;
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 1.8px;
+      letter-spacing: 1.6px;
       text-transform: uppercase;
       cursor: pointer;
       border: none;
       text-decoration: none;
       transition: transform 0.2s, box-shadow 0.2s;
+      width: 100%;
+      justify-content: center;
     }
     .cta-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
     .cta-rose {
@@ -514,6 +537,16 @@
 
     <div class="invite-wrapper">
       <img src="/convite.jpeg" alt="Convite — 1 Aninho da Sophia" class="invite-img" />
+      <div class="invite-overlay-ctas">
+        <button class="cta-btn cta-rose" onclick="document.getElementById('rsvp-section').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Confirmar Presença
+        </button>
+        <button class="cta-btn cta-outline" onclick="document.getElementById('mapa-section').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Acessar Localização
+        </button>
+      </div>
     </div>
 
     <p class="eyebrow">Confirmação de Presença</p>
@@ -527,7 +560,7 @@
       <span class="time">às 17h30</span>
     </div>
 
-    <div class="hero-ctas">
+    <div class="hero-ctas" style="display:none">
       <button class="cta-btn cta-rose" onclick="document.getElementById('rsvp-section').scrollIntoView({behavior:'smooth'})">
         <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         Confirmar Presença
