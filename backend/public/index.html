@@ -611,17 +611,6 @@
       </form>
     </div>
 
-    <!-- Guest list -->
-    <div class="card" style="margin-bottom:0">
-      <div class="section-head">
-        <h2>Presenças Confirmadas</h2>
-        <p>Todos que já confirmaram presença na festa</p>
-      </div>
-      <div id="guest-list">
-        <div class="empty">Carregando...</div>
-      </div>
-    </div>
-
   </main>
 
   <footer>
@@ -648,23 +637,7 @@
         document.getElementById('cnt-a').textContent = d.total.adultos;
         document.getElementById('cnt-c').textContent = d.total.criancas;
         document.getElementById('cnt-t').textContent = d.total.adultos + d.total.criancas;
-        const el = document.getElementById('guest-list');
-        if (!d.confirmados.length) {
-          el.innerHTML = '<div class="empty">Nenhuma confirmação ainda. Seja o primeiro!</div>';
-          return;
-        }
-        el.innerHTML = d.confirmados.map(c => `
-          <div class="guest-row">
-            <span class="guest-name">${esc(c.nome)}</span>
-            <div class="guest-tags">
-              <span class="tag tag-rose">${c.adultos} adulto${c.adultos !== 1 ? 's' : ''}</span>
-              ${c.criancas > 0 ? `<span class="tag tag-gold">${c.criancas} criança${c.criancas !== 1 ? 's' : ''}</span>` : ''}
-            </div>
-          </div>
-        `).join('');
-      } catch {
-        document.getElementById('guest-list').innerHTML = '<div class="empty">Erro ao carregar confirmações.</div>';
-      }
+      } catch {}
     }
 
     document.getElementById('rsvp-form').addEventListener('submit', async e => {
@@ -687,8 +660,7 @@
           e.target.reset();
           document.getElementById('adultos').value = '1';
           document.getElementById('criancas').value = '0';
-          loadGuests();
-        }
+          loadGuests();        }
       } catch { fb('fb', 'Erro de conexão. Tente novamente.', 'error'); }
       finally { btn.disabled = false; btn.textContent = 'Confirmar Presença'; }
     });
