@@ -547,22 +547,7 @@
     <div class="counter-strip">
       <div class="c-item">
         <span class="n" id="cnt-f">—</span>
-        <span class="l">Famílias</span>
-      </div>
-      <div class="c-sep"></div>
-      <div class="c-item">
-        <span class="n" id="cnt-a">—</span>
-        <span class="l">Adultos</span>
-      </div>
-      <div class="c-sep"></div>
-      <div class="c-item">
-        <span class="n" id="cnt-c">—</span>
-        <span class="l">Crianças</span>
-      </div>
-      <div class="c-sep"></div>
-      <div class="c-item">
-        <span class="n" id="cnt-t">—</span>
-        <span class="l">Total</span>
+        <span class="l">Presenças Confirmadas</span>
       </div>
     </div>
 
@@ -589,18 +574,8 @@
       </div>
       <form id="rsvp-form" novalidate>
         <div class="field">
-          <label for="nome">Nome completo</label>
-          <input type="text" id="nome" placeholder="Seu nome completo" required minlength="2" maxlength="100" autocomplete="name" />
-        </div>
-        <div class="field-row">
-          <div class="field">
-            <label for="adultos">Adultos</label>
-            <input type="number" id="adultos" value="1" min="1" max="20" />
-          </div>
-          <div class="field">
-            <label for="criancas">Crianças</label>
-            <input type="number" id="criancas" value="0" min="0" max="20" />
-          </div>
+          <label for="nome">Seu nome completo</label>
+          <input type="text" id="nome" placeholder="Como você quer ser chamado(a)" required minlength="2" maxlength="100" autocomplete="name" />
         </div>
         <div class="field">
           <label for="obs">Observação <span style="font-weight:300;text-transform:none;letter-spacing:0">(opcional)</span></label>
@@ -634,9 +609,6 @@
         const r = await fetch('/confirmados');
         const d = await r.json();
         document.getElementById('cnt-f').textContent = d.confirmados.length;
-        document.getElementById('cnt-a').textContent = d.total.adultos;
-        document.getElementById('cnt-c').textContent = d.total.criancas;
-        document.getElementById('cnt-t').textContent = d.total.adultos + d.total.criancas;
       } catch {}
     }
 
@@ -647,8 +619,8 @@
       btn.disabled = true; btn.textContent = 'Confirmando...';
       const body = {
         nome:      document.getElementById('nome').value.trim(),
-        adultos:   parseInt(document.getElementById('adultos').value) || 1,
-        criancas:  parseInt(document.getElementById('criancas').value) || 0,
+        adultos:   1,
+        criancas:  0,
         observacao: document.getElementById('obs').value.trim()
       };
       try {
@@ -658,9 +630,8 @@
         else {
           fb('fb', `Presença confirmada com sucesso! Até lá, ${body.nome}.`, 'success');
           e.target.reset();
-          document.getElementById('adultos').value = '1';
-          document.getElementById('criancas').value = '0';
-          loadGuests();        }
+          loadGuests();
+        }
       } catch { fb('fb', 'Erro de conexão. Tente novamente.', 'error'); }
       finally { btn.disabled = false; btn.textContent = 'Confirmar Presença'; }
     });
