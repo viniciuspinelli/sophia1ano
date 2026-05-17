@@ -3,911 +3,785 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🎀 1 Aninho da Sophia 🎀</title>
+  <title>Sophia — 1 Aninho</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --pink:       #f06292;
-      --pink-dark:  #e91e8c;
-      --pink-light: #fce4ec;
-      --gold:       #d4af37;
-      --gold-light: #fff8e1;
-      --text:       #4a2c3a;
+      --blush:      #fdf5f7;
+      --rose:       #c97a8d;
+      --rose-deep:  #a85570;
+      --rose-light: #f2d6df;
+      --rose-pale:  #faedf1;
+      --gold:       #c9a84c;
+      --gold-light: #f5edd6;
+      --text:       #4a2c38;
+      --text-muted: #9a7585;
       --white:      #ffffff;
-      --radius:     16px;
-      --shadow:     0 8px 32px rgba(240, 98, 146, 0.15);
+      --shadow-sm:  0 2px 12px rgba(74,44,56,0.08);
+      --shadow-md:  0 8px 40px rgba(74,44,56,0.12);
+      --shadow-lg:  0 20px 60px rgba(74,44,56,0.18);
+      --radius:     20px;
+      --radius-sm:  10px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #fce4ec 0%, #fff8e1 50%, #fce4ec 100%);
-      min-height: 100vh;
+      font-family: 'Raleway', sans-serif;
+      background: var(--blush);
       color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── HEADER ── */
-    header {
-      background: linear-gradient(135deg, var(--pink) 0%, #e91e8c 100%);
-      color: var(--white);
-      text-align: center;
-      padding: 48px 24px 40px;
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px 100px;
       position: relative;
       overflow: hidden;
+      background: linear-gradient(160deg, #fdf0f4 0%, #fdf8f0 50%, #f5eff8 100%);
     }
-    header::before {
+    .hero::before {
       content: '';
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,120,141,0.07) 0%, transparent 65%);
+      top: -250px; right: -200px;
       pointer-events: none;
     }
-    .confetti {
-      font-size: 2rem;
-      letter-spacing: 8px;
-      margin-bottom: 8px;
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%);
+      bottom: -150px; left: -150px;
+      pointer-events: none;
+    }
+
+    .gold-rule {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+    .gold-rule span {
       display: block;
+      height: 1px;
+      width: 60px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
     }
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 6vw, 3.5rem);
+    .gold-rule .diamond {
+      width: 7px; height: 7px;
+      background: var(--gold);
+      transform: rotate(45deg);
+    }
+
+    .invite-wrapper {
+      position: relative;
+      max-width: 340px;
+      width: 100%;
+      margin-bottom: 52px;
+    }
+    .invite-wrapper::before {
+      content: '';
+      position: absolute;
+      inset: -12px;
+      border-radius: 28px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--rose-light) 50%, var(--gold) 100%);
+      opacity: 0.45;
+      z-index: 0;
+    }
+    .invite-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border-radius: 20px;
+      display: block;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .eyebrow {
+      font-size: 0.68rem;
       font-weight: 700;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.15);
-      line-height: 1.2;
-    }
-    header .subtitle {
-      font-size: 1.1rem;
-      opacity: 0.92;
-      margin-top: 8px;
-      font-weight: 300;
-    }
-
-    /* ── MAIN ── */
-    main {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: 32px 16px 64px;
-    }
-
-    /* ── INFO CARD ── */
-    .info-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 32px;
-      margin-bottom: 28px;
-      border-top: 4px solid var(--gold);
-    }
-    .info-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--pink);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-    .info-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      background: var(--pink-light);
-      border-radius: 12px;
-      padding: 14px 16px;
-    }
-    .info-item .icon {
-      font-size: 1.6rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .info-item .label {
-      font-size: 0.75rem;
-      color: var(--pink-dark);
-      font-weight: 600;
+      letter-spacing: 3.5px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      color: var(--gold);
+      margin-bottom: 10px;
     }
-    .info-item .value {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text);
-      margin-top: 2px;
+    .hero-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(4rem, 12vw, 6.5rem);
+      color: var(--rose-deep);
+      line-height: 1;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 20px rgba(168,85,112,0.15);
+    }
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      font-style: italic;
+      color: var(--text-muted);
+      margin-bottom: 44px;
+      text-align: center;
+      max-width: 400px;
     }
 
-    /* ── COUNTER ── */
-    .counter-card {
-      background: linear-gradient(135deg, var(--pink) 0%, #e91e8c 100%);
-      border-radius: var(--radius);
-      padding: 24px 32px;
-      margin-bottom: 28px;
-      color: var(--white);
-      display: flex;
+    .date-badge {
+      display: inline-flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      box-shadow: 0 8px 24px rgba(233, 30, 140, 0.3);
+      background: var(--white);
+      border: 1px solid var(--rose-light);
+      border-radius: 18px;
+      padding: 22px 48px;
+      box-shadow: var(--shadow-sm);
+      gap: 2px;
     }
-    .counter-card .counter-label {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      font-weight: 300;
-    }
-    .counter-card .counter-num {
+    .date-badge .day {
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
-      font-weight: 700;
+      font-weight: 600;
+      color: var(--rose-deep);
       line-height: 1;
     }
-    .counter-card .counter-group { text-align: center; }
-    .counter-card .counter-divider {
-      width: 1px;
-      height: 60px;
-      background: rgba(255,255,255,0.3);
+    .date-badge .month {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .date-badge .year { font-size: 0.85rem; color: var(--text-muted); }
+    .date-badge .time {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--rose-light);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 1px;
     }
 
-    /* ── FORM CARD ── */
-    .form-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 32px;
-      margin-bottom: 28px;
-      border-top: 4px solid var(--pink);
+    .scroll-cue {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      font-size: 0.63rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      animation: pulse 2s ease-in-out infinite;
     }
-    .form-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--pink);
-      margin-bottom: 24px;
+    .scroll-cue .line { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--rose), transparent); }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.35; transform: translateX(-50%) translateY(0); }
+      50% { opacity: 1; transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* LAYOUT */
+    main { max-width: 760px; margin: 0 auto; padding: 0 20px 100px; }
+
+    .divider {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
+      margin: 52px 0;
     }
-    .form-group {
-      margin-bottom: 18px;
-    }
-    .form-group label {
-      display: block;
-      font-size: 0.85rem;
+    .divider span { display: block; height: 1px; width: 80px; background: linear-gradient(90deg, transparent, var(--rose-light), transparent); }
+    .divider .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--rose-light); }
+
+    .section-head { text-align: center; margin-bottom: 32px; }
+    .section-head h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 4vw, 2rem);
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #f8bbd9;
-      border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.95rem;
-      color: var(--text);
-      background: #fafafa;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .form-group input:focus,
-    .form-group textarea:focus {
-      border-color: var(--pink);
-      box-shadow: 0 0 0 3px rgba(240, 98, 146, 0.15);
-      background: var(--white);
-    }
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    textarea { resize: vertical; min-height: 80px; }
+    .section-head p { font-size: 0.88rem; color: var(--text-muted); }
 
-    .btn-confirmar {
+    /* DETAILS */
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 44px;
+    }
+    .detail-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 26px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid rgba(201,122,141,0.1);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .detail-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .detail-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--rose-pale);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px;
+    }
+    .detail-icon svg { width: 20px; height: 20px; stroke: var(--rose-deep); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+    .detail-label { font-size: 0.63rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+    .detail-value { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 600; color: var(--text); line-height: 1.4; }
+
+    /* COUNTER */
+    .counter-strip {
+      background: linear-gradient(135deg, var(--rose-deep) 0%, #8a3a52 100%);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 12px 40px rgba(168,85,112,0.3);
+      margin-bottom: 44px;
+    }
+    .c-item { text-align: center; }
+    .c-item .n { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 600; color: var(--white); line-height: 1; display: block; }
+    .c-item .l { font-size: 0.67rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 4px; display: block; }
+    .c-sep { width: 1px; height: 48px; background: rgba(255,255,255,0.18); }
+
+    /* FORM */
+    .card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 44px 40px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(201,122,141,0.1);
+      margin-bottom: 44px;
+    }
+    .field { margin-bottom: 20px; }
+    .field label {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .field input,
+    .field textarea {
       width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, var(--pink) 0%, #e91e8c 100%);
+      padding: 14px 16px;
+      background: var(--blush);
+      border: 1.5px solid var(--rose-light);
+      border-radius: var(--radius-sm);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.93rem;
+      font-weight: 500;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none;
+    }
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--rose);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(201,122,141,0.1);
+    }
+    textarea { resize: vertical; min-height: 88px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+    .btn-primary {
+      width: 100%;
+      padding: 17px;
+      background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
       color: var(--white);
       border: none;
-      border-radius: 12px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 600;
+      border-radius: var(--radius-sm);
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 16px rgba(233, 30, 140, 0.35);
-      letter-spacing: 0.5px;
+      box-shadow: 0 6px 24px rgba(168,85,112,0.35);
+      margin-top: 6px;
     }
-    .btn-confirmar:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(233, 30, 140, 0.4);
-    }
-    .btn-confirmar:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-    }
+    .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(168,85,112,0.45); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
 
-    /* ── ALERT ── */
-    .alert {
-      padding: 14px 18px;
-      border-radius: 10px;
+    .feedback {
       margin-top: 16px;
-      font-size: 0.9rem;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.87rem;
       font-weight: 500;
       display: none;
     }
-    .alert.success {
-      background: #e8f5e9;
-      color: #2e7d32;
-      border-left: 4px solid #43a047;
-    }
-    .alert.error {
-      background: #fce4ec;
-      color: #c62828;
-      border-left: 4px solid #ef5350;
-    }
-    .alert.show { display: block; }
+    .feedback.success { background: #f0faf2; color: #2d6a40; border-left: 3px solid #4caf72; display: block; }
+    .feedback.error   { background: #fdf2f4; color: #8a2c3a; border-left: 3px solid var(--rose); display: block; }
 
-    /* ── LISTA DE CONFIRMADOS ── */
-    .list-card {
-      background: var(--white);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 32px;
-      border-top: 4px solid var(--gold);
-    }
-    .list-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--pink);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    #lista-confirmados {
-      display: grid;
-      gap: 10px;
-    }
-    .confirmado-item {
+    /* GUEST LIST */
+    #guest-list { display: grid; gap: 10px; }
+    .guest-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 12px 16px;
-      background: var(--pink-light);
-      border-radius: 10px;
-      border-left: 4px solid var(--pink);
+      padding: 13px 16px;
+      background: var(--rose-pale);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--rose);
+      transition: background 0.2s;
     }
-    .confirmado-nome {
-      font-weight: 600;
-      color: var(--text);
-    }
-    .confirmado-badges {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    .badge {
-      font-size: 0.75rem;
-      font-weight: 600;
-      padding: 3px 10px;
+    .guest-row:hover { background: var(--rose-light); }
+    .guest-name { font-weight: 600; font-size: 0.93rem; }
+    .guest-tags { display: flex; gap: 7px; flex-shrink: 0; }
+    .tag {
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 11px;
       border-radius: 20px;
-      background: var(--pink);
-      color: var(--white);
     }
-    .badge.gold {
-      background: var(--gold);
-      color: var(--text);
-    }
-    .empty-msg {
-      text-align: center;
-      color: #b0b0b0;
-      font-size: 0.9rem;
-      padding: 24px;
-    }
+    .tag-rose { background: var(--rose); color: var(--white); }
+    .tag-gold { background: var(--gold-light); color: #7a6020; border: 1px solid rgba(201,168,76,0.3); }
+    .empty { text-align: center; padding: 40px; color: var(--text-muted); font-style: italic; font-size: 0.88rem; border: 1.5px dashed var(--rose-light); border-radius: var(--radius-sm); }
 
-    /* ── ADMIN PANEL ── */
-    #admin-panel {
-      display: none;
+    /* FOOTER */
+    footer { text-align: center; padding: 40px 24px; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.3px; }
+    footer strong { color: var(--rose-deep); font-weight: 600; }
+
+    /* ADMIN FAB */
+    .adm-fab {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(74, 44, 58, 0.7);
-      z-index: 1000;
-      overflow-y: auto;
-      padding: 24px 16px;
+      bottom: 24px; right: 24px;
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 1.5px solid var(--rose-light);
+      color: var(--text-muted);
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      z-index: 400;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, box-shadow 0.2s;
     }
-    .admin-modal {
+    .adm-fab:hover { background: var(--rose-pale); box-shadow: var(--shadow-md); }
+    .adm-fab svg { width: 15px; height: 15px; stroke: var(--text-muted); fill: none; stroke-width: 1.5; }
+
+    /* ADMIN OVERLAY */
+    #adm-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(74,44,56,0.6);
+      backdrop-filter: blur(5px);
+      z-index: 999;
+      overflow-y: auto;
+      padding: 40px 16px;
+    }
+    .adm-sheet {
       background: var(--white);
       border-radius: var(--radius);
-      max-width: 700px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 32px;
+      padding: 44px;
       position: relative;
+      box-shadow: var(--shadow-lg);
     }
-    .admin-modal h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--pink);
-      margin-bottom: 24px;
-    }
-    .admin-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-      margin-top: 12px;
-    }
-    .admin-table th {
-      background: var(--pink-light);
-      color: var(--pink-dark);
-      padding: 10px 12px;
-      text-align: left;
-      font-weight: 600;
-    }
-    .admin-table td {
-      padding: 10px 12px;
-      border-bottom: 1px solid #f0e0e8;
-      vertical-align: middle;
-    }
-    .admin-table tr:last-child td { border-bottom: none; }
-    .admin-table tr:hover td { background: #fff0f5; }
-    .btn-delete {
-      background: #ef5350;
-      color: white;
-      border: none;
-      padding: 5px 12px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-    .btn-delete:hover { background: #c62828; }
-    .btn-close-admin {
-      position: absolute;
-      top: 16px; right: 16px;
-      background: none;
-      border: 2px solid var(--pink);
-      color: var(--pink);
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      font-size: 1.1rem;
-      cursor: pointer;
-      font-weight: 700;
+    .adm-sheet h2 { font-family: 'Playfair Display', serif; font-size: 1.55rem; color: var(--text); margin-bottom: 28px; }
+    .close-btn {
+      position: absolute; top: 18px; right: 18px;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1.5px solid var(--rose-light);
+      background: none; color: var(--text-muted);
+      font-size: 0.9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, color 0.2s;
     }
-    .btn-close-admin:hover { background: var(--pink); color: var(--white); }
+    .close-btn:hover { background: var(--rose); color: var(--white); border-color: var(--rose); }
 
-    /* Login admin */
-    #admin-login { text-align: center; }
-    #admin-login input {
-      display: block;
-      width: 100%;
-      padding: 12px 16px;
-      border: 2px solid #f8bbd9;
-      border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.95rem;
-      margin-bottom: 12px;
-      outline: none;
-    }
-    #admin-login input:focus { border-color: var(--pink); }
-    .btn-login {
-      width: 100%;
-      padding: 13px;
-      background: linear-gradient(135deg, var(--pink) 0%, #e91e8c 100%);
-      color: var(--white);
-      border: none;
-      border-radius: 10px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .btn-logout {
-      background: none;
-      border: 2px solid var(--pink);
-      color: var(--pink);
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-bottom: 20px;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-logout:hover { background: var(--pink); color: var(--white); }
-    .btn-clear {
-      background: #ff7043;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.88rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 16px;
-      transition: background 0.2s;
-    }
-    .btn-clear:hover { background: #bf360c; }
-    .admin-summary {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-    .admin-stat {
-      background: var(--pink-light);
-      border-radius: 10px;
-      padding: 12px 18px;
-      text-align: center;
-    }
-    .admin-stat .num {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--pink);
-    }
-    .admin-stat .lbl {
-      font-size: 0.75rem;
-      color: var(--text);
-      font-weight: 500;
-    }
+    .adm-stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 22px; }
+    .adm-stat { background: var(--rose-pale); border-radius: var(--radius-sm); padding: 14px 20px; text-align: center; flex: 1; min-width: 90px; }
+    .adm-stat .n { font-family: 'Playfair Display', serif; font-size: 1.7rem; color: var(--rose-deep); font-weight: 600; display: block; }
+    .adm-stat .l { font-size: 0.65rem; color: var(--text-muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 24px;
-      color: var(--pink);
-      font-size: 0.82rem;
-      opacity: 0.8;
-    }
+    .adm-table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    .adm-table th { background: var(--rose-pale); color: var(--rose-deep); padding: 10px 12px; text-align: left; font-weight: 700; font-size: 0.67rem; letter-spacing: 1px; text-transform: uppercase; }
+    .adm-table td { padding: 10px 12px; border-bottom: 1px solid var(--rose-pale); vertical-align: middle; }
+    .adm-table tr:last-child td { border-bottom: none; }
+    .adm-table tr:hover td { background: #fdf6f8; }
 
-    /* ── LINK ADMIN OCULTO ── */
-    .admin-trigger {
-      position: fixed;
-      bottom: 16px;
-      right: 16px;
-      background: var(--white);
-      border: 2px solid var(--pink-light);
-      color: var(--pink);
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      font-size: 1.2rem;
-      cursor: pointer;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
-      z-index: 500;
-      transition: background 0.2s;
-    }
-    .admin-trigger:hover { background: var(--pink-light); }
+    .adm-actions { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .btn-danger { padding: 8px 16px; background: #ef5350; color: #fff; border: none; border-radius: var(--radius-sm); font-family: 'Raleway', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .btn-danger:hover { background: #c62828; }
+    .btn-danger.sm { padding: 4px 10px; font-size: 0.66rem; }
+    .btn-ghost { padding: 8px 16px; background: none; border: 1.5px solid var(--rose-light); color: var(--rose-deep); border-radius: var(--radius-sm); font-family: 'Raleway', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+    .btn-ghost:hover { background: var(--rose-pale); }
+    .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%); color: var(--white); border: none; border-radius: var(--radius-sm); font-family: 'Raleway', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; box-shadow: 0 6px 20px rgba(168,85,112,0.3); margin-top: 8px; }
 
-    @media (max-width: 520px) {
-      .form-row { grid-template-columns: 1fr; }
-      .counter-card { flex-direction: column; gap: 12px; }
-      .counter-card .counter-divider { display: none; }
+    @media (max-width: 560px) {
+      .field-row { grid-template-columns: 1fr; }
+      .card { padding: 28px 20px; }
+      .adm-sheet { padding: 28px 18px; }
+      .c-sep { display: none; }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <span class="confetti">🎀 🎂 🎈 🌸 🎀</span>
-  <h1>1 Aninho da Sophia</h1>
-  <p class="subtitle">Venha celebrar esse momento especial com a gente!</p>
-</header>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="gold-rule">
+      <span></span><div class="diamond"></div><span></span>
+    </div>
 
-<main>
+    <div class="invite-wrapper">
+      <img src="/convite.jpg" alt="Convite — 1 Aninho da Sophia" class="invite-img" />
+    </div>
 
-  <!-- Info -->
-  <div class="info-card">
-    <h2>🌸 Detalhes da Festa</h2>
-    <div class="info-grid">
-      <div class="info-item">
-        <span class="icon">📅</span>
-        <div>
-          <div class="label">Data</div>
-          <div class="value" id="info-data">A confirmar</div>
+    <p class="eyebrow">Confirmação de Presença</p>
+    <h1 class="hero-name">Sophia</h1>
+    <p class="hero-tagline">A flor mais linda do nosso jardim completa um aninho</p>
+
+    <div class="date-badge">
+      <span class="day">06</span>
+      <span class="month">Junho</span>
+      <span class="year">2026</span>
+      <span class="time">às 17h30</span>
+    </div>
+
+    <div class="scroll-cue">
+      <span>Confirmar presença</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main>
+
+    <div class="divider">
+      <span></span><div class="dot"></div><div class="dot"></div><div class="dot"></div><span></span>
+    </div>
+
+    <!-- Details -->
+    <div class="details-grid">
+      <div class="detail-card">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
+        <div class="detail-label">Data</div>
+        <div class="detail-value">06 de Junho de 2026</div>
       </div>
-      <div class="info-item">
-        <span class="icon">⏰</span>
-        <div>
-          <div class="label">Horário</div>
-          <div class="value" id="info-hora">A confirmar</div>
+      <div class="detail-card">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
         </div>
+        <div class="detail-label">Horário</div>
+        <div class="detail-value">17h30</div>
       </div>
-      <div class="info-item">
-        <span class="icon">📍</span>
-        <div>
-          <div class="label">Local</div>
-          <div class="value" id="info-local">A confirmar</div>
+      <div class="detail-card">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         </div>
+        <div class="detail-label">Local</div>
+        <div class="detail-value" id="info-local">A confirmar</div>
       </div>
-      <div class="info-item">
-        <span class="icon">💌</span>
-        <div>
-          <div class="label">Confirme até</div>
-          <div class="value" id="info-prazo">A confirmar</div>
+      <div class="detail-card">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </div>
+        <div class="detail-label">Confirmar até</div>
+        <div class="detail-value">01 de Junho de 2026</div>
       </div>
     </div>
-  </div>
 
-  <!-- Contador -->
-  <div class="counter-card">
-    <div class="counter-group">
-      <div class="counter-label">Famílias confirmadas</div>
-      <div class="counter-num" id="cnt-familias">—</div>
-    </div>
-    <div class="counter-divider"></div>
-    <div class="counter-group">
-      <div class="counter-label">Adultos</div>
-      <div class="counter-num" id="cnt-adultos">—</div>
-    </div>
-    <div class="counter-divider"></div>
-    <div class="counter-group">
-      <div class="counter-label">Crianças</div>
-      <div class="counter-num" id="cnt-criancas">—</div>
-    </div>
-  </div>
-
-  <!-- Formulário -->
-  <div class="form-card">
-    <h2>🎉 Confirmar Presença</h2>
-    <form id="form-confirmacao">
-      <div class="form-group">
-        <label for="nome">Seu nome completo *</label>
-        <input type="text" id="nome" placeholder="Ex: João Silva" required minlength="2" maxlength="100" />
+    <!-- Counter -->
+    <div class="counter-strip">
+      <div class="c-item">
+        <span class="n" id="cnt-f">—</span>
+        <span class="l">Famílias</span>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label for="adultos">Adultos *</label>
-          <input type="number" id="adultos" value="1" min="1" max="20" required />
+      <div class="c-sep"></div>
+      <div class="c-item">
+        <span class="n" id="cnt-a">—</span>
+        <span class="l">Adultos</span>
+      </div>
+      <div class="c-sep"></div>
+      <div class="c-item">
+        <span class="n" id="cnt-c">—</span>
+        <span class="l">Crianças</span>
+      </div>
+      <div class="c-sep"></div>
+      <div class="c-item">
+        <span class="n" id="cnt-t">—</span>
+        <span class="l">Total</span>
+      </div>
+    </div>
+
+    <!-- RSVP Form -->
+    <div class="card">
+      <div class="section-head">
+        <h2>Confirmar Presença</h2>
+        <p>Preencha os dados abaixo para garantir seu lugar</p>
+      </div>
+      <form id="rsvp-form" novalidate>
+        <div class="field">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" placeholder="Seu nome completo" required minlength="2" maxlength="100" autocomplete="name" />
         </div>
-        <div class="form-group">
-          <label for="criancas">Crianças</label>
-          <input type="number" id="criancas" value="0" min="0" max="20" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="observacao">Observação <span style="font-weight:300;color:#999">(opcional)</span></label>
-        <textarea id="observacao" placeholder="Alguma restrição alimentar, recado..."></textarea>
-      </div>
-      <button type="submit" class="btn-confirmar" id="btn-submit">
-        🎀 Confirmar Presença
-      </button>
-      <div class="alert" id="alert-form"></div>
-    </form>
-  </div>
-
-  <!-- Lista de confirmados -->
-  <div class="list-card">
-    <h2>✅ Quem já confirmou</h2>
-    <div id="lista-confirmados">
-      <p class="empty-msg">Carregando...</p>
-    </div>
-  </div>
-
-</main>
-
-<!-- Botão admin oculto -->
-<button class="admin-trigger" id="btn-admin-trigger" title="Área administrativa">⚙️</button>
-
-<!-- Painel Admin -->
-<div id="admin-panel">
-  <div class="admin-modal">
-    <button class="btn-close-admin" id="btn-close-admin">✕</button>
-
-    <!-- Login -->
-    <div id="admin-login">
-      <h2>🔒 Área Administrativa</h2>
-      <input type="text" id="adm-usuario" placeholder="Usuário" autocomplete="username" />
-      <input type="password" id="adm-senha" placeholder="Senha" autocomplete="current-password" />
-      <div class="alert" id="alert-login"></div>
-      <br/>
-      <button class="btn-login" id="btn-login">Entrar</button>
-    </div>
-
-    <!-- Dashboard admin (oculto até login) -->
-    <div id="admin-dashboard" style="display:none">
-      <h2>📋 Gerenciar Confirmações</h2>
-      <button class="btn-logout" id="btn-logout">Sair</button>
-
-      <div class="admin-summary" id="admin-summary"></div>
-
-      <table class="admin-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Adultos</th>
-            <th>Crianças</th>
-            <th>Observação</th>
-            <th>Data</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="admin-tbody"></tbody>
-      </table>
-
-      <button class="btn-clear" id="btn-clear-all">🗑️ Limpar todas as confirmações</button>
-    </div>
-  </div>
-</div>
-
-<footer>
-  Feito com 💕 para o 1º aninho da Sophia
-</footer>
-
-<script>
-  // ── CONFIGURAÇÃO DA FESTA ──
-  // Edite aqui com os dados reais da festa:
-  const CONFIG = {
-    data:   '06 de Junho de 2026',   // Ex: '14 de Junho de 2025'
-    hora:   '17h30',   // Ex: '15h00'
-    local:  'Avenida Capitão João 1255b Mauá, São Paulo',   // Ex: 'Rua das Flores, 123 – São Paulo'
-    prazo:  '01 de Junho de 2026',   // Ex: '7 de Junho de 2025'
-  };
-
-  // Preenche info
-  document.getElementById('info-data').textContent  = CONFIG.data;
-  document.getElementById('info-hora').textContent  = CONFIG.hora;
-  document.getElementById('info-local').textContent = CONFIG.local;
-  document.getElementById('info-prazo').textContent = CONFIG.prazo;
-
-  // ── ESTADO ──
-  let adminToken = localStorage.getItem('sophia_admin_token') || null;
-
-  // ── HELPERS ──
-  function showAlert(id, msg, type) {
-    const el = document.getElementById(id);
-    el.textContent = msg;
-    el.className = `alert ${type} show`;
-  }
-  function hideAlert(id) {
-    const el = document.getElementById(id);
-    el.className = 'alert';
-  }
-  function formatData(iso) {
-    return new Date(iso).toLocaleString('pt-BR', {
-      day: '2-digit', month: '2-digit', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    });
-  }
-
-  // ── CARREGAR CONFIRMADOS ──
-  async function carregarConfirmados() {
-    try {
-      const res = await fetch('/confirmados');
-      const data = await res.json();
-      const lista = document.getElementById('lista-confirmados');
-
-      document.getElementById('cnt-familias').textContent = data.confirmados.length;
-      document.getElementById('cnt-adultos').textContent  = data.total.adultos;
-      document.getElementById('cnt-criancas').textContent = data.total.criancas;
-
-      if (data.confirmados.length === 0) {
-        lista.innerHTML = '<p class="empty-msg">Nenhuma confirmação ainda. Seja o primeiro! 🎉</p>';
-        return;
-      }
-
-      lista.innerHTML = data.confirmados.map(c => `
-        <div class="confirmado-item">
-          <span class="confirmado-nome">🎀 ${escapeHtml(c.nome)}</span>
-          <div class="confirmado-badges">
-            <span class="badge">${c.adultos} adulto${c.adultos !== 1 ? 's' : ''}</span>
-            ${c.criancas > 0 ? `<span class="badge gold">${c.criancas} criança${c.criancas !== 1 ? 's' : ''}</span>` : ''}
+        <div class="field-row">
+          <div class="field">
+            <label for="adultos">Adultos</label>
+            <input type="number" id="adultos" value="1" min="1" max="20" />
+          </div>
+          <div class="field">
+            <label for="criancas">Crianças</label>
+            <input type="number" id="criancas" value="0" min="0" max="20" />
           </div>
         </div>
-      `).join('');
-    } catch (e) {
-      document.getElementById('lista-confirmados').innerHTML =
-        '<p class="empty-msg">Erro ao carregar confirmações.</p>';
+        <div class="field">
+          <label for="obs">Observação <span style="font-weight:300;text-transform:none;letter-spacing:0">(opcional)</span></label>
+          <textarea id="obs" placeholder="Restrição alimentar, recado..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-submit">Confirmar Presença</button>
+        <div class="feedback" id="fb"></div>
+      </form>
+    </div>
+
+    <!-- Guest list -->
+    <div class="card" style="margin-bottom:0">
+      <div class="section-head">
+        <h2>Presenças Confirmadas</h2>
+        <p>Todos que já confirmaram presença na festa</p>
+      </div>
+      <div id="guest-list">
+        <div class="empty">Carregando...</div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    Feito com carinho para o primeiro aninho de <strong>Sophia</strong>
+  </footer>
+
+  <!-- Admin FAB -->
+  <button class="adm-fab" id="fab" aria-label="Administração">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-5 0-8 2.5-8 4v1h16v-1c0-1.5-3-4-8-4z"/></svg>
+  </button>
+
+  <!-- Admin overlay -->
+  <div id="adm-overlay">
+    <div class="adm-sheet">
+      <button class="close-btn" id="close-adm">&#x2715;</button>
+
+      <div id="adm-login">
+        <h2>Área Administrativa</h2>
+        <div class="field" style="margin-bottom:16px">
+          <label for="adm-u">Usuário</label>
+          <input type="text" id="adm-u" autocomplete="username" />
+        </div>
+        <div class="field" style="margin-bottom:16px">
+          <label for="adm-p">Senha</label>
+          <input type="password" id="adm-p" autocomplete="current-password" />
+        </div>
+        <div class="feedback" id="fb-login"></div>
+        <button class="btn-login" id="btn-login">Entrar</button>
+      </div>
+
+      <div id="adm-dash" style="display:none">
+        <h2>Gerenciar Confirmações</h2>
+        <div class="adm-stats" id="adm-stats"></div>
+        <table class="adm-table">
+          <thead>
+            <tr>
+              <th>#</th><th>Nome</th><th>Adultos</th><th>Crianças</th><th>Observação</th><th>Data</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="adm-tbody"></tbody>
+        </table>
+        <div class="adm-actions">
+          <button class="btn-danger" id="btn-clear">Limpar tudo</button>
+          <button class="btn-ghost" id="btn-logout">Sair</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let tok = localStorage.getItem('sophia_tok') || null;
+
+    function esc(s) {
+      const d = document.createElement('div');
+      d.appendChild(document.createTextNode(s));
+      return d.innerHTML;
     }
-  }
+    function fmt(iso) {
+      return new Date(iso).toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
+    }
+    function fb(id, msg, type) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.className = 'feedback ' + type;
+    }
 
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-  }
-
-  // ── FORMULÁRIO ──
-  document.getElementById('form-confirmacao').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    hideAlert('alert-form');
-    const btn = document.getElementById('btn-submit');
-    btn.disabled = true;
-    btn.textContent = '⏳ Confirmando...';
-
-    const nome      = document.getElementById('nome').value.trim();
-    const adultos   = parseInt(document.getElementById('adultos').value) || 1;
-    const criancas  = parseInt(document.getElementById('criancas').value) || 0;
-    const observacao = document.getElementById('observacao').value.trim();
-
-    try {
-      const res = await fetch('/confirmar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ nome, adultos, criancas, observacao })
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        showAlert('alert-form', data.erro || 'Erro ao confirmar presença.', 'error');
-      } else {
-        showAlert('alert-form', `🎉 Presença confirmada! Até lá, ${nome}!`, 'success');
-        document.getElementById('form-confirmacao').reset();
-        document.getElementById('adultos').value = '1';
-        document.getElementById('criancas').value = '0';
-        carregarConfirmados();
+    async function loadGuests() {
+      try {
+        const r = await fetch('/confirmados');
+        const d = await r.json();
+        document.getElementById('cnt-f').textContent = d.confirmados.length;
+        document.getElementById('cnt-a').textContent = d.total.adultos;
+        document.getElementById('cnt-c').textContent = d.total.criancas;
+        document.getElementById('cnt-t').textContent = d.total.adultos + d.total.criancas;
+        const el = document.getElementById('guest-list');
+        if (!d.confirmados.length) {
+          el.innerHTML = '<div class="empty">Nenhuma confirmação ainda. Seja o primeiro!</div>';
+          return;
+        }
+        el.innerHTML = d.confirmados.map(c => `
+          <div class="guest-row">
+            <span class="guest-name">${esc(c.nome)}</span>
+            <div class="guest-tags">
+              <span class="tag tag-rose">${c.adultos} adulto${c.adultos !== 1 ? 's' : ''}</span>
+              ${c.criancas > 0 ? `<span class="tag tag-gold">${c.criancas} criança${c.criancas !== 1 ? 's' : ''}</span>` : ''}
+            </div>
+          </div>
+        `).join('');
+      } catch {
+        document.getElementById('guest-list').innerHTML = '<div class="empty">Erro ao carregar confirmações.</div>';
       }
-    } catch (err) {
-      showAlert('alert-form', 'Erro de conexão. Tente novamente.', 'error');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = '🎀 Confirmar Presença';
     }
-  });
 
-  // ── ADMIN PANEL ──
-  document.getElementById('btn-admin-trigger').addEventListener('click', () => {
-    document.getElementById('admin-panel').style.display = 'block';
-    if (adminToken) {
-      verificarTokenAdmin();
+    document.getElementById('rsvp-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      document.getElementById('fb').className = 'feedback';
+      const btn = document.getElementById('btn-submit');
+      btn.disabled = true; btn.textContent = 'Confirmando...';
+      const body = {
+        nome:      document.getElementById('nome').value.trim(),
+        adultos:   parseInt(document.getElementById('adultos').value) || 1,
+        criancas:  parseInt(document.getElementById('criancas').value) || 0,
+        observacao: document.getElementById('obs').value.trim()
+      };
+      try {
+        const r = await fetch('/confirmar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+        const d = await r.json();
+        if (!r.ok) { fb('fb', d.erro || 'Erro ao confirmar.', 'error'); }
+        else {
+          fb('fb', `Presença confirmada com sucesso! Até lá, ${body.nome}.`, 'success');
+          e.target.reset();
+          document.getElementById('adultos').value = '1';
+          document.getElementById('criancas').value = '0';
+          loadGuests();
+        }
+      } catch { fb('fb', 'Erro de conexão. Tente novamente.', 'error'); }
+      finally { btn.disabled = false; btn.textContent = 'Confirmar Presença'; }
+    });
+
+    document.getElementById('fab').addEventListener('click', () => {
+      document.getElementById('adm-overlay').style.display = 'block';
+      if (tok) checkTok();
+    });
+    document.getElementById('close-adm').addEventListener('click', () => { document.getElementById('adm-overlay').style.display = 'none'; });
+    document.getElementById('adm-overlay').addEventListener('click', e => { if (e.target.id === 'adm-overlay') document.getElementById('adm-overlay').style.display = 'none'; });
+
+    document.getElementById('btn-login').addEventListener('click', async () => {
+      document.getElementById('fb-login').className = 'feedback';
+      const u = document.getElementById('adm-u').value.trim();
+      const p = document.getElementById('adm-p').value;
+      if (!u || !p) { fb('fb-login', 'Preencha usuário e senha.', 'error'); return; }
+      try {
+        const r = await fetch('/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ usuario: u, senha: p }) });
+        const d = await r.json();
+        if (!r.ok || !d.sucesso) { fb('fb-login', d.erro || 'Credenciais inválidas.', 'error'); return; }
+        tok = d.token; localStorage.setItem('sophia_tok', tok);
+        showDash();
+      } catch { fb('fb-login', 'Erro de conexão.', 'error'); }
+    });
+
+    document.getElementById('btn-logout').addEventListener('click', async () => {
+      try { await fetch('/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + tok } }); } catch {}
+      tok = null; localStorage.removeItem('sophia_tok');
+      document.getElementById('adm-login').style.display = 'block';
+      document.getElementById('adm-dash').style.display = 'none';
+    });
+
+    document.getElementById('btn-clear').addEventListener('click', async () => {
+      if (!confirm('Limpar TODAS as confirmações? Esta ação não pode ser desfeita.')) return;
+      try {
+        const r = await fetch('/confirmados', { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + tok } });
+        if (r.ok) { loadGuests(); showDash(); }
+      } catch {}
+    });
+
+    async function checkTok() {
+      try {
+        const r = await fetch('/verificar-token', { headers: { 'Authorization': 'Bearer ' + tok } });
+        const d = await r.json();
+        if (d.valido) showDash();
+        else { tok = null; localStorage.removeItem('sophia_tok'); }
+      } catch {}
     }
-  });
 
-  document.getElementById('btn-close-admin').addEventListener('click', () => {
-    document.getElementById('admin-panel').style.display = 'none';
-  });
-
-  document.getElementById('admin-panel').addEventListener('click', (e) => {
-    if (e.target === document.getElementById('admin-panel')) {
-      document.getElementById('admin-panel').style.display = 'none';
+    async function showDash() {
+      document.getElementById('adm-login').style.display = 'none';
+      document.getElementById('adm-dash').style.display = 'block';
+      try {
+        const r = await fetch('/admin/confirmados', { headers: { 'Authorization': 'Bearer ' + tok } });
+        const d = await r.json();
+        document.getElementById('adm-stats').innerHTML = `
+          <div class="adm-stat"><span class="n">${d.confirmados.length}</span><span class="l">Famílias</span></div>
+          <div class="adm-stat"><span class="n">${d.total.adultos}</span><span class="l">Adultos</span></div>
+          <div class="adm-stat"><span class="n">${d.total.criancas}</span><span class="l">Crianças</span></div>
+          <div class="adm-stat"><span class="n">${d.total.adultos + d.total.criancas}</span><span class="l">Total</span></div>
+        `;
+        const tb = document.getElementById('adm-tbody');
+        if (!d.confirmados.length) {
+          tb.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:24px;font-style:italic">Nenhuma confirmação</td></tr>';
+          return;
+        }
+        tb.innerHTML = d.confirmados.map((c, i) => `
+          <tr>
+            <td style="color:var(--text-muted)">${i+1}</td>
+            <td style="font-weight:600">${esc(c.nome)}</td>
+            <td>${c.adultos}</td>
+            <td>${c.criancas}</td>
+            <td style="color:var(--text-muted);font-style:italic">${c.observacao ? esc(c.observacao) : '—'}</td>
+            <td style="color:var(--text-muted);font-size:0.78rem">${fmt(c.data_confirmacao)}</td>
+            <td><button class="btn-danger sm" onclick="del(${c.id})">Remover</button></td>
+          </tr>
+        `).join('');
+      } catch {}
     }
-  });
 
-  document.getElementById('btn-login').addEventListener('click', async () => {
-    hideAlert('alert-login');
-    const usuario = document.getElementById('adm-usuario').value.trim();
-    const senha   = document.getElementById('adm-senha').value;
-    if (!usuario || !senha) {
-      showAlert('alert-login', 'Preencha usuário e senha.', 'error');
-      return;
+    async function del(id) {
+      if (!confirm('Remover esta confirmação?')) return;
+      try {
+        const r = await fetch('/confirmados/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + tok } });
+        if (r.ok) { loadGuests(); showDash(); }
+        else alert('Erro ao remover.');
+      } catch { alert('Erro de conexão.'); }
     }
-    try {
-      const res = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario, senha })
-      });
-      const data = await res.json();
-      if (!res.ok || !data.sucesso) {
-        showAlert('alert-login', data.erro || 'Credenciais inválidas.', 'error');
-      } else {
-        adminToken = data.token;
-        localStorage.setItem('sophia_admin_token', adminToken);
-        mostrarDashboardAdmin();
-      }
-    } catch (err) {
-      showAlert('alert-login', 'Erro de conexão.', 'error');
-    }
-  });
 
-  document.getElementById('btn-logout').addEventListener('click', async () => {
-    try {
-      await fetch('/logout', { method: 'POST', headers: { 'Authorization': `Bearer ${adminToken}` } });
-    } catch (_) {}
-    adminToken = null;
-    localStorage.removeItem('sophia_admin_token');
-    document.getElementById('admin-login').style.display = 'block';
-    document.getElementById('admin-dashboard').style.display = 'none';
-  });
-
-  document.getElementById('btn-clear-all').addEventListener('click', async () => {
-    if (!confirm('Tem certeza que deseja limpar TODAS as confirmações? Esta ação não pode ser desfeita!')) return;
-    try {
-      const res = await fetch('/confirmados', {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${adminToken}` }
-      });
-      if (res.ok) {
-        carregarConfirmados();
-        mostrarDashboardAdmin();
-      }
-    } catch (err) {
-      alert('Erro ao limpar confirmações.');
-    }
-  });
-
-  async function verificarTokenAdmin() {
-    try {
-      const res = await fetch('/verificar-token', {
-        headers: { 'Authorization': `Bearer ${adminToken}` }
-      });
-      const data = await res.json();
-      if (data.valido) {
-        mostrarDashboardAdmin();
-      } else {
-        adminToken = null;
-        localStorage.removeItem('sophia_admin_token');
-      }
-    } catch (_) {}
-  }
-
-  async function mostrarDashboardAdmin() {
-    document.getElementById('admin-login').style.display = 'none';
-    document.getElementById('admin-dashboard').style.display = 'block';
-    try {
-      const res = await fetch('/admin/confirmados', {
-        headers: { 'Authorization': `Bearer ${adminToken}` }
-      });
-      const data = await res.json();
-
-      // Sumário
-      document.getElementById('admin-summary').innerHTML = `
-        <div class="admin-stat"><div class="num">${data.confirmados.length}</div><div class="lbl">Famílias</div></div>
-        <div class="admin-stat"><div class="num">${data.total.adultos}</div><div class="lbl">Adultos</div></div>
-        <div class="admin-stat"><div class="num">${data.total.criancas}</div><div class="lbl">Crianças</div></div>
-        <div class="admin-stat"><div class="num">${data.total.adultos + data.total.criancas}</div><div class="lbl">Total pessoas</div></div>
-      `;
-
-      // Tabela
-      const tbody = document.getElementById('admin-tbody');
-      if (data.confirmados.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center;color:#999;padding:20px">Nenhuma confirmação</td></tr>';
-        return;
-      }
-      tbody.innerHTML = data.confirmados.map((c, i) => `
-        <tr>
-          <td>${i + 1}</td>
-          <td>${escapeHtml(c.nome)}</td>
-          <td>${c.adultos}</td>
-          <td>${c.criancas}</td>
-          <td>${c.observacao ? escapeHtml(c.observacao) : '—'}</td>
-          <td>${formatData(c.data_confirmacao)}</td>
-          <td><button class="btn-delete" onclick="removerConfirmado(${c.id})">🗑️</button></td>
-        </tr>
-      `).join('');
-    } catch (err) {
-      document.getElementById('admin-tbody').innerHTML =
-        '<tr><td colspan="7" style="text-align:center;color:red">Erro ao carregar.</td></tr>';
-    }
-  }
-
-  async function removerConfirmado(id) {
-    if (!confirm('Remover esta confirmação?')) return;
-    try {
-      const res = await fetch(`/confirmados/${id}`, {
-        method: 'DELETE',
-        headers: { 'Authorization': `Bearer ${adminToken}` }
-      });
-      if (res.ok) {
-        carregarConfirmados();
-        mostrarDashboardAdmin();
-      } else {
-        alert('Erro ao remover.');
-      }
-    } catch (err) {
-      alert('Erro de conexão.');
-    }
-  }
-
-  // ── INIT ──
-  carregarConfirmados();
-  setInterval(carregarConfirmados, 30000); // atualiza a cada 30s
-</script>
+    loadGuests();
+    setInterval(loadGuests, 30000);
+  </script>
 
 </body>
 </html>
