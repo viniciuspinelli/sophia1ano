@@ -24,7 +24,7 @@ async function initDB() {
     await client.query('BEGIN');
 
     await client.query(`
-      CREATE TABLE IF NOT EXISTS confirmados (
+      CREATE TABLE IF NOT EXISTS confirmados_aniversario (
         id SERIAL PRIMARY KEY,
         nome VARCHAR(255) NOT NULL,
         adultos INTEGER NOT NULL DEFAULT 1,
@@ -35,7 +35,7 @@ async function initDB() {
     `);
 
     await client.query(`
-      CREATE TABLE IF NOT EXISTS admins (
+      CREATE TABLE IF NOT EXISTS admins_aniversario (
         id SERIAL PRIMARY KEY,
         usuario VARCHAR(100) UNIQUE NOT NULL,
         senha_hash VARCHAR(255) NOT NULL,
@@ -44,19 +44,19 @@ async function initDB() {
     `);
 
     await client.query(`
-      CREATE TABLE IF NOT EXISTS admin_tokens (
+      CREATE TABLE IF NOT EXISTS admin_tokens_aniversario (
         token VARCHAR(255) PRIMARY KEY,
-        admin_id INTEGER REFERENCES admins(id) ON DELETE CASCADE,
+        admin_id INTEGER REFERENCES admins_aniversario(id) ON DELETE CASCADE,
         criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         expira_em TIMESTAMP
       )
     `);
 
     // Criar admin padrão se não existir
-    const adminExists = await client.query('SELECT * FROM admins WHERE usuario = $1', ['admin']);
+    const adminExists = await client.query('SELECT * FROM admins_aniversario WHERE usuario = $1', ['admin']);
     if (adminExists.rows.length === 0) {
       const senhaHash = await bcrypt.hash('sophia2025', 10);
-      await client.query('INSERT INTO admins (usuario, senha_hash) VALUES ($1, $2)', ['admin', senhaHash]);
+      await client.query('INSERT INTO admins_aniversario (usuario, senha_hash) VALUES ($1, $2)', ['admin', senhaHash]);
       console.log('✅ Admin padrão criado: admin / sophia2025');
     }
 
@@ -79,7 +79,7 @@ async function verificarAdmin(req, res, next) {
   }
   try {
     const result = await pool.query(
-      'SELECT * FROM admin_tokens WHERE token = $1 AND expira_em > NOW()',
+      'SELECT * FROM admin_tokens_aniversario WHERE token = $1 AND expira_em > NOW()',
       [token]
     );
     if (result.rows.length === 0) {
@@ -101,7 +101,7 @@ app.post('/login', async (req, res) => {
     return res.status(400).json({ sucesso: false, erro: 'Usuário e senha são obrigatórios' });
   }
   try {
-    const result = await pool.query('SELECT * FROM admins WHERE usuario = $1', [usuario]);
+    const result = await pool.query('SELECT * FROM admins_aniversario WHERE usuario = $1', [usuario]);
     if (result.rows.length === 0) {
       return res.status(401).json({ sucesso: false, erro: 'Usuário não encontrado' });
     }
@@ -112,7 +112,7 @@ app.post('/login', async (req, res) => {
     }
     const token = crypto.randomBytes(32).toString('hex');
     const expiraEm = new Date(Date.now() + 24 * 60 * 60 * 1000);
-    await pool.query('INSERT INTO admin_tokens (token, admin_id, expira_em) VALUES ($1, $2, $3)', [token, admin.id, expiraEm]);
+    await pool.query('INSERT INTO admin_tokens_aniversario (token, admin_id, expira_em) VALUES ($1, $2, $3)', [token, admin.id, expiraEm]);
     res.json({ sucesso: true, token });
   } catch (err) {
     console.error('Erro no login:', err);
@@ -124,7 +124,7 @@ app.post('/login', async (req, res) => {
 app.post('/logout', async (req, res) => {
   const token = req.headers.authorization?.replace('Bearer ', '');
   try {
-    await pool.query('DELETE FROM admin_tokens WHERE token = $1', [token]);
+    await pool.query('DELETE FROM admin_tokens_aniversario WHERE token = $1', [token]);
     res.json({ sucesso: true });
   } catch (err) {
     res.status(500).json({ sucesso: false, erro: 'Erro ao fazer logout' });
@@ -137,7 +137,7 @@ app.get('/verificar-token', async (req, res) => {
   if (!token) return res.json({ valido: false });
   try {
     const result = await pool.query(
-      'SELECT * FROM admin_tokens WHERE token = $1 AND expira_em > NOW()',
+      'SELECT * FROM admin_tokens_aniversario WHERE token = $1 AND expira_em > NOW()',
       [token]
     );
     res.json({ valido: result.rows.length > 0 });
@@ -150,7 +150,7 @@ app.get('/verificar-token', async (req, res) => {
 app.post('/admin/trocar-senha', verificarAdmin, async (req, res) => {
   const { senha_antiga, senha_nova } = req.body;
   try {
-    const admin = await pool.query('SELECT * FROM admins WHERE id = $1', [req.adminId]);
+    const admin = await pool.query('SELECT * FROM admins_aniversario WHERE id = $1', [req.adminId]);
     if (admin.rows.length === 0) {
       return res.status(404).json({ erro: 'Admin não encontrado' });
     }
@@ -159,7 +159,7 @@ app.post('/admin/trocar-senha', verificarAdmin, async (req, res) => {
       return res.status(401).json({ erro: 'Senha antiga incorreta' });
     }
     const novaSenhaHash = await bcrypt.hash(senha_nova, 10);
-    await pool.query('UPDATE admins SET senha_hash = $1 WHERE id = $2', [novaSenhaHash, req.adminId]);
+    await pool.query('UPDATE admins_aniversario SET senha_hash = $1 WHERE id = $2', [novaSenhaHash, req.adminId]);
     res.json({ sucesso: true, mensagem: 'Senha alterada com sucesso!' });
   } catch (err) {
     console.error(err);
@@ -190,7 +190,7 @@ app.post('/confirmar', async (req, res) => {
   try {
     // Verificar se já confirmou (mesmo nome)
     const existente = await pool.query(
-      'SELECT * FROM confirmados WHERE LOWER(nome) = LOWER($1)',
+      'SELECT * FROM confirmados_aniversario WHERE LOWER(nome) = LOWER($1)',
       [nome.trim()]
     );
     if (existente.rows.length > 0) {
@@ -198,7 +198,7 @@ app.post('/confirmar', async (req, res) => {
     }
 
     const result = await pool.query(
-      'INSERT INTO confirmados (nome, adultos, criancas, observacao) VALUES ($1, $2, $3, $4) RETURNING *',
+      'INSERT INTO confirmados_aniversario (nome, adultos, criancas, observacao) VALUES ($1, $2, $3, $4) RETURNING *',
       [nome.trim(), numAdultos, numCriancas, observacao?.trim() || null]
     );
 
@@ -214,7 +214,7 @@ app.post('/confirmar', async (req, res) => {
 app.get('/confirmados', async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT id, nome, adultos, criancas, data_confirmacao FROM confirmados ORDER BY data_confirmacao ASC'
+      'SELECT id, nome, adultos, criancas, data_confirmacao FROM confirmados_aniversario ORDER BY data_confirmacao ASC'
     );
     const total = result.rows.reduce(
       (acc, r) => ({ adultos: acc.adultos + r.adultos, criancas: acc.criancas + r.criancas }),
@@ -231,7 +231,7 @@ app.get('/confirmados', async (req, res) => {
 app.delete('/confirmados/:id', verificarAdmin, async (req, res) => {
   const { id } = req.params;
   try {
-    const result = await pool.query('DELETE FROM confirmados WHERE id = $1 RETURNING *', [id]);
+    const result = await pool.query('DELETE FROM confirmados_aniversario WHERE id = $1 RETURNING *', [id]);
     if (result.rowCount === 0) {
       return res.status(404).json({ erro: 'Confirmação não encontrada' });
     }
@@ -246,7 +246,7 @@ app.delete('/confirmados/:id', verificarAdmin, async (req, res) => {
 app.get('/admin/confirmados', verificarAdmin, async (req, res) => {
   try {
     const result = await pool.query(
-      'SELECT * FROM confirmados ORDER BY data_confirmacao ASC'
+      'SELECT * FROM confirmados_aniversario ORDER BY data_confirmacao ASC'
     );
     const total = result.rows.reduce(
       (acc, r) => ({ adultos: acc.adultos + r.adultos, criancas: acc.criancas + r.criancas }),
@@ -262,7 +262,7 @@ app.get('/admin/confirmados', verificarAdmin, async (req, res) => {
 // Limpar todas as confirmações (admin)
 app.delete('/confirmados', verificarAdmin, async (req, res) => {
   try {
-    await pool.query('DELETE FROM confirmados');
+    await pool.query('DELETE FROM confirmados_aniversario');
     res.json({ sucesso: true });
   } catch (err) {
     console.error('Erro ao limpar:', err);
