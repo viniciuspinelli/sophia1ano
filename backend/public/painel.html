@@ -331,7 +331,6 @@
         <p class="refresh-note" id="last-update"></p>
 
         <div class="actions-row">
-          <button class="btn-danger" id="btn-clear">Limpar todas as confirmações</button>
           <button class="btn-ghost" id="btn-logout">Sair</button>
         </div>
       </div>
@@ -392,14 +391,6 @@
       sessionStorage.removeItem('sophia_adm_tok');
       document.getElementById('dashboard').style.display = 'none';
       document.getElementById('login-card').style.display = 'block';
-    });
-
-    document.getElementById('btn-clear').addEventListener('click', async () => {
-      if (!confirm('Limpar TODAS as confirmações? Esta ação não pode ser desfeita.')) return;
-      try {
-        const r = await fetch('/confirmados', { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + tok } });
-        if (r.ok) loadData();
-      } catch {}
     });
 
     document.getElementById('btn-refresh').addEventListener('click', () => loadData());
