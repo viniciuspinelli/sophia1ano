@@ -389,6 +389,50 @@
     textarea { resize: vertical; min-height: 88px; }
     .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 
+    .tipo-group {
+      display: flex;
+      gap: 14px;
+    }
+    .tipo-option {
+      flex: 1;
+      position: relative;
+    }
+    .tipo-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+    .tipo-option label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 16px;
+      background: var(--blush);
+      border: 1.5px solid var(--rose-light);
+      border-radius: var(--radius-sm);
+      font-size: 0.83rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      margin: 0;
+    }
+    .tipo-option label svg {
+      width: 17px; height: 17px;
+      stroke: currentColor; fill: none;
+      stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+    .tipo-option input[type="radio"]:checked + label {
+      background: var(--rose-pale);
+      border-color: var(--rose);
+      color: var(--rose-deep);
+      box-shadow: 0 0 0 4px rgba(201,122,141,0.1);
+    }
+
     .btn-primary {
       width: 100%;
       padding: 17px;
@@ -578,6 +622,25 @@
           <input type="text" id="nome" placeholder="Como você quer ser chamado(a)" required minlength="2" maxlength="100" autocomplete="name" />
         </div>
         <div class="field">
+          <label>Você é</label>
+          <div class="tipo-group">
+            <div class="tipo-option">
+              <input type="radio" id="tipo-adulto" name="tipo" value="adulto" checked />
+              <label for="tipo-adulto">
+                <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Adulto
+              </label>
+            </div>
+            <div class="tipo-option">
+              <input type="radio" id="tipo-crianca" name="tipo" value="crianca" />
+              <label for="tipo-crianca">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M8 21v-1a4 4 0 0 1 8 0v1"/><path d="M5 21v-1"/><path d="M19 21v-1"/></svg>
+                Criança
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="field">
           <label for="obs">Observação <span style="font-weight:300;text-transform:none;letter-spacing:0">(opcional)</span></label>
           <textarea id="obs" placeholder="Restrição alimentar, recado..."></textarea>
         </div>
@@ -617,10 +680,11 @@
       document.getElementById('fb').className = 'feedback';
       const btn = document.getElementById('btn-submit');
       btn.disabled = true; btn.textContent = 'Confirmando...';
+      const tipo = document.querySelector('input[name="tipo"]:checked').value;
       const body = {
         nome:      document.getElementById('nome').value.trim(),
-        adultos:   1,
-        criancas:  0,
+        adultos:   tipo === 'adulto' ? 1 : 0,
+        criancas:  tipo === 'crianca' ? 1 : 0,
         observacao: document.getElementById('obs').value.trim()
       };
       try {
