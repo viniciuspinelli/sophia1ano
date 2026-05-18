@@ -177,14 +177,17 @@ app.post('/confirmar', async (req, res) => {
     return res.status(400).json({ erro: 'Nome é obrigatório (mínimo 2 caracteres)' });
   }
 
-  const numAdultos = parseInt(adultos) || 1;
-  const numCriancas = parseInt(criancas) || 0;
+  const numAdultos = parseInt(adultos) ?? 1;
+  const numCriancas = parseInt(criancas) ?? 0;
 
-  if (numAdultos < 1 || numAdultos > 20) {
-    return res.status(400).json({ erro: 'Número de adultos inválido (1-20)' });
+  if (isNaN(numAdultos) || numAdultos < 0 || numAdultos > 20) {
+    return res.status(400).json({ erro: 'Número de adultos inválido (0-20)' });
   }
-  if (numCriancas < 0 || numCriancas > 20) {
+  if (isNaN(numCriancas) || numCriancas < 0 || numCriancas > 20) {
     return res.status(400).json({ erro: 'Número de crianças inválido (0-20)' });
+  }
+  if (numAdultos + numCriancas < 1) {
+    return res.status(400).json({ erro: 'Informe pelo menos uma pessoa' });
   }
 
   try {
